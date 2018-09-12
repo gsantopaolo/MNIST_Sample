@@ -24,14 +24,19 @@ namespace MNIST_Sample
         public PredictionModel<MNIST_Data, Prediction> BuildAndTrain()
         {
             var pipeline = new LearningPipeline();
+            #region loading data with textloader
             //pipeline.Add(new TextLoader(_trainingDataLocation).CreateFrom<MNIST_Data>(useHeader: false, separator: ','));
-            //pipeline.Add(new MissingValueSubstitutor("FixedAcidity") { ReplacementKind = NAReplaceTransformReplacementKind.Mean});
-            var a = CollectionDataSource.Create(helper.ReadMNIST_Data(_trainingDataLocation));
-            pipeline.Add(a);
-
-
             //pipeline.Add(MakeNormalizer());
             //pipeline.Add(new ColumnConcatenator("Features"));//, "Number", "Pixels"));
+            #endregion
+
+            #region loading data with external csv reader
+            var a = CollectionDataSource.Create(helper.ReadMNIST_Data(_trainingDataLocation));
+            pipeline.Add(a);
+            //pipeline.Add(MakeNormalizer());
+            //pipeline.Add(new ColumnConcatenator("Features"));//, "Number", "Pixels"));
+            #region
+
             pipeline.Add(_algorythm);
 
             return pipeline.Train<MNIST_Data, Prediction>();
