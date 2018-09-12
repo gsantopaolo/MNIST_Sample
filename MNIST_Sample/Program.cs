@@ -11,6 +11,9 @@ namespace MNIST_Sample
     {
         static void Main(string[] args)
         {
+
+            // if you are using the code first time rememebr to unzip mnist_test.zip
+
             var trainingDataLocation = @"data/mnist_train.csv";
             var testDataLocation = @"data/mnist_test.csv";
 
